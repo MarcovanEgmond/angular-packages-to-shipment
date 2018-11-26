@@ -1,0 +1,48 @@
+<div class="fxg-col fxg-col--mt20 fxg-col--mb20 col-sm-6">
+  <h3>{{formtitle}}</h3>
+  <form [formGroup]="packageForm" *ngIf="showPackageForm">
+      <div class="fxg-field">
+        <input formControlName="name" [(ngModel)]="package.name" required maxlength="32" class="fxg-field__input-text fxg-field__input--required" />
+        <span class="fxg-field__placeholder fxg-field__floating-placeholder">
+          <span *ngIf="name.invalid && (name.pristine && name.untouched)">Name</span>
+          <span *ngIf="name.invalid && (name.dirty || name.touched)" [ngClass]="'error alert alert-danger'"> 
+            <span *ngIf="name.errors.required"><strong>Name</strong> is required.</span>
+            <span *ngIf="name.errors.maxlength"><strong>Name</strong> may not be longer than 32 characters.</span>
+          </span>
+        </span>
+      </div>
+      <div class="fxg-field">
+        <input formControlName="weight" [(ngModel)]="package.weight" [max]="restWeight" required [pattern]="pweightPattern" class="fxg-field__input-text fxg-field__input--required" />
+        <span class="fxg-field__placeholder fxg-field__floating-placeholder">
+          <span *ngIf="weight.invalid && (weight.pristine && weight.untouched)">Weight</span>
+          <span *ngIf="weight.invalid && (weight.dirty || weight.touched)" [ngClass]="'error alert alert-danger'">
+            <span *ngIf="weight.errors.required"><strong>Weight</strong> is required.</span>
+            <span *ngIf="weight.errors.pattern"><strong>Weight</strong> may have a maximum precision of 3 decimals.</span>
+            <span *ngIf="weight.errors.max">The maximun <strong>Name</strong> of this packages can be {{restWeight}}kg</span>
+          </span>
+        </span>
+      </div>
+      <div class="fxg-field">
+        <input formControlName="value" [(ngModel)]="package.value" required [pattern]="pvaluePattern" class="fxg-field__input-text fxg-field__input--required has-prefix-label" />
+        <span class="prefix-label">{{countryCurrency}}</span>
+        <span class="fxg-field__placeholder fxg-field__floating-placeholder">
+          <span *ngIf="value.invalid && (value.pristine && value.untouched)">Value</span>
+          <span *ngIf="value.invalid && (value.dirty || value.touched)" [ngClass]="'alert alert-danger'"> 
+            <span *ngIf="value.errors.required"><strong>Value</strong> is required.</span>
+            <span *ngIf="value.errors.pattern"><strong>Value</strong> must have a correct currency pattarn.</span>
+          </span>
+        </span>
+      </div>
+      
+      <input type="submit" class="fxg-button fxg-button--orange" [disabled]="!packageForm.valid" value="Add package" (click)="addPackage(); packageForm.reset()"/>
+  </form>
+
+  <div *ngIf="!showPackageForm">
+      <div *ngIf="showPackageLimitMessage"  class="alert alert-info">
+        You have added the maximum amount of 5 packages to your shipment!
+      </div>
+      <div *ngIf="showWeightLimitMessage" class="alert alert-warning">
+        You have reached the maximun amount of weight (25kg) for your shipment!
+      </div>
+  </div>
+</div>

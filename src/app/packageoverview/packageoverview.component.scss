@@ -1,0 +1,40 @@
+.oddeven-rows .row .fxg-col {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.oddeven-rows .row:nth-child(odd) .fxg-col {
+    background-color: #fafafa;
+}
+.oddeven-rows .row:last-child .fxg-col {
+    border-bottom: solid 1px #b6b6b6;
+}
+.footer-row {
+    font-weight: bold;
+}
+.footer-row .fxg-col {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.fxg-text--align-left {
+    text-align: left
+}
+.fxg-text--align-center {
+    text-align: center
+}
+.fxg-text--align-right {
+    text-align: right
+}
+
+.overview__delete-button {
+    right: 20px;
+    width: 25px;
+    border: 0 none;
+    background: none;
+    color: #e5213c;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 15px;
+    outline: 0 none;
+    font-family: monospace;
+}

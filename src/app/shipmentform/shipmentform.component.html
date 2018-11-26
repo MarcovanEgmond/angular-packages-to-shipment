@@ -1,0 +1,74 @@
+<div class="fxg-col col-sm-12">
+  <h3>{{shipmenttitle}}</h3>
+</div>
+<form [formGroup]="shipmentForm">
+    <div class="fxg-col fxg-col--mt20 fxg-col--mb20 col-sm-6">
+      <h4>{{companyinfo}}</h4>
+      <div class="fxg-field">
+        <input formControlName="cnamecheck" [(ngModel)]="shipment.cname" required class="fxg-field__input-text fxg-field__input--required" />
+        <span class="fxg-field__placeholder fxg-field__floating-placeholder">
+          <span *ngIf="cnamecheck.invalid && (cnamecheck.pristine && cnamecheck.untouched) || cnamecheck.valid">Name</span>
+          <span *ngIf="cnamecheck.invalid && (cnamecheck.dirty || cnamecheck.touched)" [ngClass]="'error alert alert-danger'"> 
+            <span *ngIf="cnamecheck.errors.required"><strong>Name</strong> is required.</span>
+          </span>
+        </span>
+      </div>
+      <div class="fxg-field">
+        <input formControlName="caddresscheck" [(ngModel)]="shipment.caddress" required class="fxg-field__input-text fxg-field__input--required" />
+        <span class="fxg-field__placeholder fxg-field__floating-placeholder">
+          <span *ngIf="caddresscheck.invalid && (caddresscheck.pristine && caddresscheck.untouched) || caddresscheck.valid">Address</span>
+          <span *ngIf="caddresscheck.invalid && (caddresscheck.dirty || caddresscheck.touched)" [ngClass]="'error alert alert-danger'">
+            <span *ngIf="caddresscheck.errors.required"><strong>Address</strong> is required.</span>
+          </span>
+        </span>
+      </div>
+      <div class="fxg-field dropdown">
+        <input formControlName="ccountrycheck" [(ngModel)]="shipment.ccountry" disabled required [ngClass]="{'focus' : showccountry}" class="fxg-field__input-text fxg-field__input--required" />
+        <span class="fxg-field__placeholder fxg-field__floating-placeholder">
+            <span *ngIf="ccountrycheck.invalid && (ccountrycheck.pristine && ccountrycheck.untouched) || ccountrycheck.valid">Country</span>
+            <span *ngIf="ccountrycheck.invalid && (ccountrycheck.dirty || ccountrycheck.touched)" [ngClass]="'error alert alert-danger'">
+              <span *ngIf="ccountrycheck.errors.required"><strong>Country</strong> is required.</span>
+            </span>
+          </span>
+          <button (click)="showccountry = !showccountry" class="dorpdown-toggle">{{showccountry ? '&#708;' : '&#709;'}}</button>
+          <ul class="dropdown-menu" *ngIf="showccountry">
+            <li [ngClass]="{'active': country.name === companycountry}"  *ngFor="let country of countries; let i = index" 
+                (click)="setCcountry(i)">{{country.name}}</li>
+          </ul> 
+      </div>
+    </div>
+  <div class="fxg-col fxg-col--mt20 fxg-col--mb20 col-sm-6">
+    <h4>{{deliveryaddress}}</h4>
+    <div class="fxg-field">
+      <input formControlName="saddresscheck" [(ngModel)]="shipment.saddress" required class="fxg-field__input-text fxg-field__input--required" />
+      <span class="fxg-field__placeholder fxg-field__floating-placeholder">
+        <span *ngIf="saddresscheck.invalid && (saddresscheck.pristine && saddresscheck.untouched) || saddresscheck.valid">Address</span>
+        <span *ngIf="saddresscheck.invalid && (saddresscheck.dirty || saddresscheck.touched)" [ngClass]="'error alert alert-danger'">
+          <span *ngIf="saddresscheck.errors.required"><strong>Address</strong> is required.</span>
+        </span>
+      </span>
+    </div>
+    <div class="fxg-field dropdown">
+      <input formControlName="scountrycheck" [(ngModel)]="shipment.scountry" disabled required [ngClass]="{'focus' : showscountry}" class="fxg-field__input-text fxg-field__input--required" />
+      <span class="fxg-field__placeholder fxg-field__floating-placeholder">
+        <span *ngIf="scountrycheck.invalid && (scountrycheck.pristine && scountrycheck.untouched) || scountrycheck.valid">Country</span>
+        <span *ngIf="scountrycheck.invalid && (scountrycheck.dirty || scountrycheck.touched)" [ngClass]="'error alert alert-danger'">
+          <span *ngIf="scountrycheck.errors.required"><strong>Country</strong> is required.</span>
+        </span>
+      </span>
+      <button (click)="showscountry = !showscountry" class="dorpdown-toggle">{{showscountry ? '&#708;' : '&#709;'}}</button>
+      <ul class="dropdown-menu" *ngIf="showscountry">
+        <li [ngClass]="{'active': country.name === shipmentcountry}" *ngFor="let country of countries; let i = index" 
+            (click)="setScountry(i)">{{country.name}}</li>
+      </ul> 
+    </div>
+
+    <input type="submit" 
+        class="fxg-button fxg-button--orange" 
+        [disabled]="!shipmentForm.valid" 
+        value="Create shipment" 
+        (click)="createShipment();"/>
+        
+  </div>
+  
+</form>

@@ -1,0 +1,17 @@
+<div class="fxg-col fxg-col--mt20 fxg-col--mb20 col-sm-6">
+  <h3>{{resulttitle}}</h3>
+    <div class="oddeven-rows clearfix">
+        <div class="row " *ngFor="let package of packages; let i = index">
+          <div class="fxg-col fxg-col--pb20 col-sm-5">{{package.name}}</div>
+          <div class="fxg-col fxg-col--pb20 col-sm-3 fxg-text--align-right">{{package.weight | customweight:3}} kg</div>
+          <div class="fxg-col fxg-col--pb20 col-sm-3 fxg-text--align-right">€ {{package.value | customcurrency:'EUR' }}</div>
+          <div class="fxg-col fxg-col--pb20 col-sm-1"><button class="overview__delete-button" (click)="removePackage(i)">&#10006;</button></div>
+        </div>
+    </div>
+    <div class="row footer-row clearfix">
+      <div class="fxg-col fxg-col--pb20 col-sm-5">Total packages: {{packageTotals.packagecount}}</div>
+      <div class="fxg-col fxg-col--pb20 col-sm-3 fxg-text--align-right">{{packageTotals.weighttotal | customweight:3}} kg</div>
+      <div class="fxg-col fxg-col--pb20 col-sm-3 fxg-text--align-right">€ {{packageTotals.valuetotal | customcurrency:'EUR' }}</div>
+      <div class="fxg-col fxg-col--pb20 col-sm-1"></div>
+    </div>
+</div>

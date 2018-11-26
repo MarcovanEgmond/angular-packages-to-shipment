@@ -1,0 +1,23 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<app-mainheader></app-mainheader>
+<div class="fxg-wrapper">
+  <div class="row">
+    <div class="fxg-col fxg-col--mt20 fxg-col--mb20 col-sm-8 col-sm-offset-2">
+      <div class="title section">
+        <h2 class="fxg-title fxg-title--default fxg-title--align-center">{{title}}</h2>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+      <app-shipmentform (currShipment)="currShipmentSet($event)" (showPackageForm)="shipmentFormSubmit()"></app-shipmentform>
+  </div>
+  <div class="row" *ngIf="showPackages">
+    <div class="fxg-col fxg-col--mt20 fxg-col--mb20 col-sm-8 col-sm-offset-2" >
+      <div class="fxg-rte fxg-rte--align-center">
+        <P>{{description}}</P>
+      </div>
+    </div>
+    <app-packageform [currShipment]="setCurrShipment"></app-packageform>
+    <app-packageoverview></app-packageoverview>
+  </div>
+</div>
